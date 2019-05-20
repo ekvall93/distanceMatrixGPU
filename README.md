@@ -61,7 +61,7 @@ np.allclose(SKlearn_full, DM_full)
 
 
 
-## Runt time peforamnce increse.
+## Run time performance increase.
 
 The GPU allows for substantial speed up for larger matrices. It speeds up both thicker and smaller matrices (see figure one below).
 
