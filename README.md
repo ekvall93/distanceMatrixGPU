@@ -20,7 +20,7 @@ bash install.sh
 
 ## Running the tests
 
-Initilization
+Initialization
 ```
 from numbaDistanceMatrix.cudaDistanceMatrix import DistanceMatrix
 from sklearn.metrics.pairwise import cosine_similarity
@@ -28,7 +28,7 @@ import numpy as np
 n = 200
 X = np.random.rand(n, n).astype(np.float32)
 ```
-Calculate distance matrix
+Calculate the distance matrix
 
 ```
 DM = DistanceMatrix()
@@ -44,14 +44,14 @@ cosine_similarity(X)[10,2]
 #0.77965623
 ```
 
-Check correctness for under triangle
+Check correctness for under triangle.
 ```
 SKlearn_under = cosine_similarity(X)[np.tril_indices(n, k=-1)]
 under_dist = DM.get_distance_matrix(fullMatrix=False)
 np.allclose(np.sort(under_dist), np.sort(SKlearn_under))
 #True
 ```
-Retrive full matrix is possible.
+Retrieve full distance matrix if necessary.
 ```
 SKlearn_full = cosine_similarity(X)
 DM_full = DM.get_distance_matrix(fullMatrix=True)
