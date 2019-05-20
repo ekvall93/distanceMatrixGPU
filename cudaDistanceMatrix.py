@@ -7,8 +7,7 @@ linalg.init()
 from numpy.linalg import norm
 import os.path
 
-from .fillArrayNumbaFloat32 import cudaFillFlattenArray32, cudaFillFullArray32
-#from .fillArrayNumbaFloat64 import cudaFillFlattenArray64, cudaFillFullArray64
+from fillArrayNumbaFloat32 import cudaFillFlattenArray32, cudaFillFullArray32
 
 class DistanceMatrix:
     """GPU accelerated Distannce matrix caluclations.

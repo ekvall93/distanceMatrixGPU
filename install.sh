@@ -1,4 +1,5 @@
-conda install h5py
+pip install h5py
 pip install scikit-cuda
-conda install numba
-conda install cudatoolkit
+pip install numba
+pip install cudatoolkit
+pip install sklearn

@@ -1,4 +1,4 @@
-from numbaDistanceMatrix.cudaDistanceMatrix import DistanceMatrix
+from cudaDistanceMatrix import DistanceMatrix
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
