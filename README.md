@@ -18,6 +18,15 @@ Use this following command to install all required packages.
 bash install.sh
 ```
 
+You need to set correct path to cuda
+
+```
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-X/lib64/
+```
+
+Here X is you cuda version e.g., 9.0. 
+
+
 ## Running the tests
 
 Initialization
