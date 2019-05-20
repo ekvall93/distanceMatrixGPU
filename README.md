@@ -5,7 +5,7 @@ GPU accelerated distance matrix calculation
 
 ### Prerequisites
 
-python3.6 has been used to test out the repository. he installation uses anaconda, but it is not necessary.
+python3.6 has been used to test out the repository. The installation uses anaconda, but it is not necessary.
 
 A GPU that uses CUDA is necessary.
 
