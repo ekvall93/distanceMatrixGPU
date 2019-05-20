@@ -1,6 +1,23 @@
 # DistanceMatrixGPU
 GPU accelerated distance matrix calculation
 
+## Getting Started
+
+### Prerequisites
+
+python3.6 has been used to test out the repository. he installation uses anaconda, but it is not necessary.
+
+A GPU that uses CUDA is necessary.
+
+
+### Installing
+
+Use this following command to install all required packages.
+
+```
+bash install.sh
+```
+
 ## Runt time peforamnce increse.
 
 The GPU allows for substantial speed up for larger matrices. It speeds up both thicker and smaller matrices (see figure one below).
