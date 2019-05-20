@@ -1,7 +1,7 @@
 # DistanceMatrixGPU
 GPU accelerated distance matrix calculation
 
-##Runt time peforamnce increse.
+## Runt time peforamnce increse.
 
 The GPU allows for substantial speed up for larger matrices. Furthermore, the computational speedup is obtained for both thicker and smaller matrices, see figures below.
 
@@ -11,11 +11,13 @@ The GPU allows for substantial speed up for larger matrices. Furthermore, the co
 ![alt text](/images/GPUNN10.png)
 
 
-##Memory efficency
+## Memory efficency
 
 To be more memory efficient only the under triangle is calculated. This is done by dividing the matrix into smaller sub-matrices and only storing the values below the diagonal, see figure below. This is possible since the distance matrix is symmetric i.e., D(i,j) = D(j,i). 
 
 
 ![alt text](/images/subDot.png)
 
-The memory storage is still $O(n^{2})$
+The memory storage is still
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{n^{2}&space;-&space;n}{2}=O(n^{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{n^{2}&space;-&space;n}{2}=O(n^{2})" title="\frac{n^{2} - n}{2}=O(n^{2})" /></a>
