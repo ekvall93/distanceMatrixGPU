@@ -18,6 +18,49 @@ Use this following command to install all required packages.
 bash install.sh
 ```
 
+## Running the tests
+
+Initilization
+```
+from numbaDistanceMatrix.cudaDistanceMatrix import DistanceMatrix
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+n = 200
+X = np.random.rand(n, n).astype(np.float32)
+```
+Calculate distance matrix
+
+```
+DM = DistanceMatrix()
+DM.calculate_distmatrix(X)
+```
+
+Get particular entry in distance matrix.
+
+```
+DM.get_similarity(10,2)
+#0.77965623
+cosine_similarity(X)[10,2]
+#0.77965623
+```
+
+Check correctness for under triangle
+```
+SKlearn_under = cosine_similarity(X)[np.tril_indices(n, k=-1)]
+under_dist = DM.get_distance_matrix(fullMatrix=False)
+np.allclose(np.sort(under_dist), np.sort(SKlearn_under))
+#True
+```
+Retrive full matrix is possible.
+```
+SKlearn_full = cosine_similarity(X)
+DM_full = DM.get_distance_matrix(fullMatrix=True)
+np.allclose(SKlearn_full, DM_full)
+#True
+```
+
+
+
 ## Runt time peforamnce increse.
 
 The GPU allows for substantial speed up for larger matrices. It speeds up both thicker and smaller matrices (see figure one below).
