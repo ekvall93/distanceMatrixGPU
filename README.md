@@ -21,10 +21,11 @@ bash install.sh
 You need to set correct path to cuda
 
 ```
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-X/lib64/
+export PATH=/usr/local/cuda-X.X/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-X.X/lib64\{LD_LIBRARY_PATH:+:${$LIBRARY_PATH}}
 ```
 
-Here X is you cuda version e.g., 9.0. 
+Here X.X is you cuda version e.g., 9.2, 10.0 etc. The code have only been tested for cuda9.2 and cuda10.0. 
 
 
 ## Running the tests
