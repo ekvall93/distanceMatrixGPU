@@ -101,5 +101,8 @@ To find the entry for (i,j) still only takes
 Since there is a unique mapping for each tuple (i,j) to l in the under triangle, see figure below.
 ![alt text](/images/mapping.png)
 
+For completeness, if j=1,2,3,...,(n-1) and i < j then just use equation 1 in the figure above,but instead of but use i -> j and j -> i since it's a symmetrical i.e., A(l(i,j))= A(l(j,i)).
+In the third case, i=j just output 1 since a distance matrix D(i,j)=D(i,i)=D(j,j)=D(j,i)=1.
+
 
 
