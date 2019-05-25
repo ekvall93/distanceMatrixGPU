@@ -103,5 +103,14 @@ Since there is a unique mapping for each tuple (i,j) to l in the under triangle,
 
 For completeness, if j=1,2,3,...,(n-1) and i < j then just use equation 1 in the figure above. However, use i -> j and j -> i since it's the matrix D is symmetrical i.e., D(i,j)=D(j,i)=A(l(i,j))= A(l(j,i)). For instance, D(2,3)=D(3,2)=A(l(2,3))=A(l(3,2)). In the third case when i=j, the output is always 1 since a distance matrix D(i,j)=D(i,i)=A(l(j,j))=A(l(j,i))=1. Hence, the diagonal dont need to be explicity stored.
 
+## Authors
+
+* **Markus Ekvall**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
 
 
