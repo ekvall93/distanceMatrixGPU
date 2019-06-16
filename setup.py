@@ -8,6 +8,5 @@ setup(
     author='Markus Ekvall',
     author_email='marekv@kth.se',
     license='mitlicense',
-    packages=['distanceMatrixGPU'],
     zip_safe=False
 )
