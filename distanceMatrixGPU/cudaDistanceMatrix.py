@@ -26,7 +26,8 @@ class DistanceMatrix:
     def __init__(self,
             file_name="cuda_dist",
             gpu=True,
-            numba=True):
+            numba=True,
+            dictinoray=None):
         if os.path.isfile(str(file_name)):
             os.remove(str(file_name))
         
@@ -35,16 +36,13 @@ class DistanceMatrix:
         self.out_type = np.float32
         self.float = "float32"
         self.load_full = False
-        
-
-        """ if dtype_out == "float32":
-            self.out_type = np.float32
-            self.float = dtype_out
-        elif dtype_out == "float64":
-            self.out_type = np.float64
-            self.float = dtype_out """
         self.gpu = gpu
         self.numba = numba
+
+        if dictinoray:
+            self.dictinoray = dictinoray
+        else:
+            self.dictinoray = None
     def _cuda_norm(self, X):
         """Caluclate L2-norm on gpu.
 
@@ -353,6 +351,14 @@ class DistanceMatrix:
         subdistMatrix_flatten: array
             Part of the complete flatten array that have been given distance values. 
         """
+        if isinstance(i, str) or isinstance(j, str):
+            if self.dictinoray:
+                try:
+                    i = int(self.dictinoray[i])
+                    j = int(self.dictinoray[j])
+                except:
+                    print("The values dont exists in dict.")
+        
         if not self.load_full:
             if load_full:
                 self.load_full = load_full
@@ -374,6 +380,65 @@ class DistanceMatrix:
                 return val
         else:
             return self.fullDistMatrix[i, j]
+    
+    def most_similar(self, i, load_full=False):
+        """Fill the flatten distance matrix with data from sub-arrays.
+
+        Parameters
+        ----------
+        entries : int
+            Number of entries in flatten array
+        X: array
+            Sub-array with distance data.
+        dx: int
+            Length of the sub-array of the complete array to get filled.
+        Returns
+        -------
+        subdistMatrix_flatten: array
+            Part of the complete flatten array that have been given distance values. 
+        """
+        if isinstance(i, str) or isinstance(j, str):
+            if self.dictinoray:
+                try:
+                    i = int(self.dictinoray[i])
+                except:
+                    print("The values dont exists in dict.")
+        
+
+
+        if not self.load_full:
+            if load_full:
+                self.load_full = load_full
+                f_dist = h5py.File(self.filename_dist, 'r')
+                self._get_full_distance_matrix(f_dist)
+
+                sims = self.fullDistMatrix[i, :]
+            else:
+                sims = list()
+                f_dist = h5py.File(self.filename_dist, 'r')
+                sorted_filenames = self._sort_files(f_dist)
+                
+                for j in range(self.N):
+                    if i == j:
+                        val = 1
+                    elif i < j:
+                        f_n = self._get_val(sorted_filenames, j, i)
+                        val = self._get_ix(f_dist,f_n,j, i)
+                    else:
+                        f_n = self._get_val(sorted_filenames, i, j)
+                        val = self._get_ix(f_dist,f_n,i,j)
+                    sims.append(val)
+                sims = np.asarray(sims)
+
+        else:
+            sims = self.fullDistMatrix[i, :]
+
+        if self.dictinoray:
+            sorted_val, sorted_name = zip(*sorted(zip(sims, self.dictinoray.keys())))
+            return dict(zip(sorted_name[::-1], sorted_val[::-1]))
+        else:
+            return self.fullDistMatrix[i, :]
+                
     
     def _get_bounderies(self, f_n):
         """Get bounderies of sub-array in the array.
@@ -529,7 +594,6 @@ class DistanceMatrix:
                             subdistMatrix_flatten = XTX[np.tril_indices(l_x, k=-1)]
                     
                     self.file_dist.create_dataset(str(x_1) + "-" + str(x_2 - 1) + "_" + str(y_1)+"-"+ str(y_2 - 1) + ':subArray_' + str(i) + "_" + str(j) + "_" + str(arr_nr), data=subdistMatrix_flatten, dtype=subdistMatrix_flatten.dtype)
-                    #self.file_dist.create_dataset(str(x_1) + "-" + str(x_2) + "_" + str(y_1)+"-"+ str(y_2), data=subdistMatrix_flatten, dtype=subdistMatrix_flatten.dtype)
                     arr_nr +=1
                 
         self.file_dist.close()
