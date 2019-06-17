@@ -15,7 +15,7 @@ A GPU that uses CUDA is necessary.
 Use this following command to install all required packages.
 
 ```
-bash install.sh
+pip install git+https://github.com/ekvall93/distanceMatrixGPU.git
 ```
 
 You need to set correct path to cuda
